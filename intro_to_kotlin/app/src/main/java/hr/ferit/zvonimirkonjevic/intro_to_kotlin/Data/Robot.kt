@@ -7,4 +7,8 @@ class Robot {
     fun goRight(steps: Int){
         x += steps
     }
+
+    fun goLeft(steps: Int){
+        x -= steps
+    }
 }
