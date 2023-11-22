@@ -11,4 +11,8 @@ class Robot {
     fun goLeft(steps: Int){
         x -= steps
     }
+
+    fun goUp(steps: Int){
+        y += steps
+    }
 }
