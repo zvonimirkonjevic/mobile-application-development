@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import hr.ferit.zvonimirkonjevic.intro_to_kotlin.ui.theme.Intro_to_kotlinTheme
 
-class MainActivity : ComponentActivity() {
+class intro_to_kotlin : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // Variables
