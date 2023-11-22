@@ -19,4 +19,8 @@ class Robot {
     fun goDown(steps: Int){
         y -= steps
     }
+
+    fun getLocation(){
+        println("($x, $y)")
+    }
 }
