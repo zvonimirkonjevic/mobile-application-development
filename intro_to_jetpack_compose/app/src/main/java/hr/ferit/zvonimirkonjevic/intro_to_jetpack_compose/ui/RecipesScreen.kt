@@ -222,3 +222,28 @@ fun IconButton(
         }
     }
 }
+
+@Composable
+fun Chip(
+    text: String,
+    backgroundColor: Color = White,
+    textColor: Color = Pink,
+) {
+    Box(
+        modifier = Modifier
+            .background(
+                color = backgroundColor,
+                shape = RoundedCornerShape(12.dp)
+            )
+            .clip(RoundedCornerShape(12.dp))
+            .padding(horizontal = 8.dp, vertical = 2.dp)
+    ) {
+        Text(
+            text = text,
+            style = TextStyle(
+                color = textColor,
+                fontSize = 12.sp
+            )
+        )
+    }
+}
