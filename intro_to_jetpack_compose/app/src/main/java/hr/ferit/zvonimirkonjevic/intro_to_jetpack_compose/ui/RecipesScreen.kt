@@ -158,3 +158,39 @@ fun TabButton(
         Text(text)
     }
 }
+
+@Composable
+fun RecipeCategories() {
+    var activeButtonId by remember { mutableStateOf(0) }
+
+    Row (
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .padding(horizontal = 16.dp, vertical = 16.dp)
+            .background(Color.Transparent)
+            .fillMaxWidth()
+            .height(44.dp)
+    ){
+        TabButton(
+            text = "All",
+            isActive = activeButtonId == 0,
+            modifier = Modifier.weight(1f)
+        ) {
+            activeButtonId = 0
+        }
+        TabButton(
+            text = "Breakfast",
+            isActive = activeButtonId == 1,
+            modifier = Modifier.weight(1f)
+        ) {
+            activeButtonId = 1
+        }
+        TabButton(
+            text = "Lunch",
+            isActive = activeButtonId == 2,
+            modifier = Modifier.weight(1f)
+        ) {
+            activeButtonId = 2
+        }
+    }
+}
