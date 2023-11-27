@@ -56,13 +56,19 @@ import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.ui.theme.White
 @Preview(showBackground = true)
 @Composable
 fun RecipesScreen() {
-
+    Column (
+        verticalArrangement = Arrangement.Top,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.fillMaxSize()
+    ){
+        ScreenTitle(title = "What would you like to cook today?", subtitle = "Good morning, Zvonimir")
+    }
 }
 
 @Composable
 fun ScreenTitle(
-    Title: String,
-    subTitle: String
+    title: String,
+    subtitle: String
 ) {
     Box(
         modifier = Modifier
@@ -70,7 +76,7 @@ fun ScreenTitle(
             .fillMaxWidth()
     ){
         Text(
-            text = subTitle,
+            text = subtitle,
             style = TextStyle(color = Purple500,
                 fontWeight = FontWeight.Light,
                 fontStyle = FontStyle.Italic
@@ -80,7 +86,7 @@ fun ScreenTitle(
 
         )
         Text(
-            text = Title,
+            text = title,
             style = TextStyle(
                 fontWeight = FontWeight.Bold,
                 fontSize = 26.sp,
