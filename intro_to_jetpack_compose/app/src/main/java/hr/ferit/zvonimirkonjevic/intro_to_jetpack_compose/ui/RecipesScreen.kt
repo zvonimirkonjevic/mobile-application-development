@@ -195,3 +195,29 @@ fun RecipeCategories() {
         }
     }
 }
+
+@Composable
+fun IconButton(
+    @DrawableRes iconResource: Int,
+    labelText: String
+) {
+    Button(
+        onClick = { /*TODO*/ },
+        colors = ButtonDefaults.buttonColors(containerColor = Pink)
+    ) {
+        Row{
+            Icon(
+                painter = painterResource(id = iconResource),
+                contentDescription = labelText
+            )
+            Spacer(Modifier.width(2.dp))
+            Text(
+                text = labelText,
+                style = TextStyle(
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Light
+                )
+            )
+        }
+    }
+}
