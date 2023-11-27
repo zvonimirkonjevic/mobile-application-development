@@ -64,6 +64,7 @@ fun RecipesScreen() {
         ScreenTitle(title = "What would you like to cook today?", subtitle = "Good morning, Zvonimir")
         SearchBar(iconResource = R.drawable.ic_search, labelText = "Search...")
         RecipeCategories()
+        RecipeCard(imageResource = R.drawable.strawberry_pie_1, title = "Strawberry Cake")
         IconButton(iconResource = R.drawable.ic_plus, labelText = "Add new recipe")
     }
 }
