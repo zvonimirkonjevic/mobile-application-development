@@ -63,6 +63,7 @@ fun RecipesScreen() {
     ){
         ScreenTitle(title = "What would you like to cook today?", subtitle = "Good morning, Zvonimir")
         SearchBar(iconResource = R.drawable.ic_search, labelText = "Search...")
+        RecipeCategories()
     }
 }
 
