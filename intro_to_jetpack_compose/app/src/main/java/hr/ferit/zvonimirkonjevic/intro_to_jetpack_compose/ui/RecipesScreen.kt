@@ -258,6 +258,7 @@ fun RecipeCard(
         modifier = Modifier
             .width(215.dp)
             .height(326.dp)
+            .padding(bottom = 16.dp)
     ){
         Card(
             modifier = Modifier
