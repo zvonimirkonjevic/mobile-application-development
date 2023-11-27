@@ -247,3 +247,52 @@ fun Chip(
         )
     }
 }
+
+@Composable
+fun RecipeCard(
+    @DrawableRes imageResource: Int,
+    title: String
+) {
+    Box(
+        modifier = Modifier
+            .width(215.dp)
+            .height(326.dp)
+    ){
+        Card(
+            modifier = Modifier
+                .clip(RoundedCornerShape(12.dp))
+                .width(215.dp)
+                .height(326.dp)
+        ){
+            Image(
+                painter = painterResource(id = imageResource),
+                contentDescription = title,
+                modifier = Modifier
+                    .fillMaxSize(),
+                contentScale = ContentScale.Crop,
+            )
+        }
+        Column(
+            modifier = Modifier
+                .padding(horizontal = 12.dp, vertical = 14.dp)
+                .align(Alignment.BottomStart)
+        ){
+            Text(
+                title,
+                style = TextStyle(
+                    color = White,
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            )
+            Row {
+                Chip(text = "30min")
+                Spacer(
+                    modifier = Modifier
+                    .padding(horizontal = 2.dp)
+                )
+                Chip(text = "4 ingredients")
+            }
+        }
+    }
+}
