@@ -97,3 +97,44 @@ fun ScreenTitle(
         )
     }
 }
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun SearchBar(
+    @DrawableRes iconResource: Int,
+    labelText: String,
+    colors: TextFieldColors = TextFieldDefaults.textFieldColors(
+        containerColor = Color.Transparent,
+        placeholderColor = DarkGray,
+        textColor = DarkGray,
+        unfocusedLabelColor = DarkGray,
+        focusedIndicatorColor = Color.Transparent,
+        unfocusedIndicatorColor = Color.Transparent,
+        disabledIndicatorColor = Color.Transparent
+    )
+) {
+    var searchInput by remember {
+        mutableStateOf("")
+    }
+    TextField(
+        value = searchInput,
+        onValueChange = { searchInput = it },
+        label = {
+            Text(labelText)
+        },
+        leadingIcon = {
+            Icon(
+                painter = painterResource(id = iconResource),
+                contentDescription = labelText,
+                tint = DarkGray,
+                modifier = Modifier
+                    .width(16.dp)
+                    .height(16.dp)
+            )
+        },
+        colors = colors,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 8.dp)
+    )
+}
