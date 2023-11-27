@@ -12,7 +12,8 @@ data class Recipe (
     var rating: String = "",
     var description: String = "",
     var reviews: String = "",
-    var ingredients: List<Ingredient>? = null,
+    var ingredients: List<Ingredient>? = null
+)
 
     val recipes: List<Recipe> = listOf(
         Recipe(
@@ -92,4 +93,3 @@ data class Recipe (
             )
         )
     )
-)
