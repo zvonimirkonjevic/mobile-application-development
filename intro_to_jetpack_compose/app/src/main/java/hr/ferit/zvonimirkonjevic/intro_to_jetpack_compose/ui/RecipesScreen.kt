@@ -139,3 +139,22 @@ fun SearchBar(
             .padding(horizontal = 16.dp, vertical = 8.dp)
     )
 }
+
+@Composable
+fun TabButton(
+    text: String,
+    isActive: Boolean,
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit
+) {
+    Button(
+        onClick = onClick,
+        shape = RoundedCornerShape(24.dp),
+        elevation = null,
+        colors = if (isActive) ButtonDefaults.buttonColors(contentColor = White, containerColor = Pink) else ButtonDefaults.buttonColors(contentColor = DarkGray, containerColor = LightGray),
+        modifier = Modifier
+            .fillMaxHeight()
+    ) {
+        Text(text)
+    }
+}
