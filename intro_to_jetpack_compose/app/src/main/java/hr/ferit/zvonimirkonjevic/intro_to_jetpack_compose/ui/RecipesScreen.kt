@@ -56,5 +56,38 @@ import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.ui.theme.White
 @Preview(showBackground = true)
 @Composable
 fun RecipesScreen() {
-    
+
+}
+
+@Composable
+fun ScreenTitle(
+    Title: String,
+    subTitle: String
+) {
+    Box(
+        modifier = Modifier
+            .padding(top = 16.dp)
+            .fillMaxWidth()
+    ){
+        Text(
+            text = subTitle,
+            style = TextStyle(color = Purple500,
+                fontWeight = FontWeight.Light,
+                fontStyle = FontStyle.Italic
+            ),
+            modifier = Modifier
+                .padding(horizontal = 15.dp)
+
+        )
+        Text(
+            text = Title,
+            style = TextStyle(
+                fontWeight = FontWeight.Bold,
+                fontSize = 26.sp,
+
+                ),
+            modifier = Modifier
+                .padding(horizontal = 15.dp, vertical = 16.dp)
+        )
+    }
 }
