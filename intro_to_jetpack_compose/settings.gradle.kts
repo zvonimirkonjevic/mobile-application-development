@@ -15,4 +15,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "intro_to_jetpack_compose"
 include(":app")
- 
