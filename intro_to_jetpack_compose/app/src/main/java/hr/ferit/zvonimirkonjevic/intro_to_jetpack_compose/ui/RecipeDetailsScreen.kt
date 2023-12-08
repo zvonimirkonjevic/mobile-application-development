@@ -32,6 +32,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -43,9 +44,10 @@ import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.Data.recipes
 import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.R
 import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.ui.theme.DarkGray
 import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.ui.theme.LightGray
+import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.ui.theme.Pink
 import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.ui.theme.White
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun RecipeDetailsScreen() {
     val scrollState = rememberLazyListState()
@@ -88,9 +90,22 @@ fun TopImageAndBar(
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp, vertical = 8.dp)
             ) {
-                CircularButton(iconResource = R.drawable.ic_arrow_back)
+                CircularButton(iconResource = R.drawable.ic_arrow_back, color = Pink)
                 CircularButton(iconResource = R.drawable.ic_favorite)
             }
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(
+                        Brush.verticalGradient(
+                            colors = listOf(
+                                Color.Transparent,
+                                White
+                            ),
+                            startY = 100f
+                        )
+                    )
+            )
         }
     }
 }
