@@ -324,3 +324,12 @@ fun IngredientCard(
         )
     }
 }
+
+@Composable
+fun IngredientsList(
+    recipe: Recipe
+) {
+    EasyGrid(nColumns = 3, items = recipe.ingredients) {
+        IngredientCard(it.image, it.name, it.subtitle)
+    }
+}
