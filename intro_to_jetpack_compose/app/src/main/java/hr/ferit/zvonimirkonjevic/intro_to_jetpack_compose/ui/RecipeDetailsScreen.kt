@@ -3,10 +3,20 @@ package hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.ui
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ButtonElevation
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MaterialTheme.shapes
@@ -15,43 +25,49 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.Data.recipes
 import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.R
 import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.ui.theme.DarkGray
+import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.ui.theme.LightGray
 
-@Preview
 @Composable
 fun RecipeDetailsScreen() {
-    IngredientCard(iconResource = R.drawable.mint, title = "Mint", subtitle = "20g")
+    val scrollState = rememberLazyListState()
+    val recipe = recipes[0]
+
+    LazyColumn(
+        state = scrollState,
+        modifier = Modifier.fillMaxSize(),
+    ){
+        item{
+            
+        }
+    }
 }
 
 @Composable
-fun IngredientCard(
-    @DrawableRes iconResource: Int,
-    title: String,
-    subtitle: String
+fun TopImageAndBar(
+    @DrawableRes coverImage: Int
 ) {
-    Column (
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.padding(bottom= 16.dp)
+    Box(
+        modifier = Modifier
+            .height(300.dp)
+            .fillMaxWidth()
     ){
-        Card (
-            shape = shapes.large,
+        Image(
+            painter = painterResource(id = coverImage),
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
             modifier = Modifier
-                .background(Color.LightGray)
-                .width(100.dp)
-                .height(100.dp)
-                .padding(bottom = 8.dp)
-
-        ) {
-            Image(painter = painterResource(id = iconResource), contentDescription = null, Modifier.padding(16.dp))
-            Text(text = title, modifier = Modifier.width(100.dp), fontSize = 14.sp, fontWeight = FontWeight.Medium)
-            Text(text = subtitle, color = DarkGray, modifier = Modifier.width(100.dp), fontSize = 14.sp)
-        }
+                .fillMaxSize()
+        )
     }
 }
