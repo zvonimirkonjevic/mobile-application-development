@@ -24,6 +24,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ButtonElevation
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MaterialTheme.shapes
@@ -284,10 +285,42 @@ fun <T> EasyGrid(nColumns: Int, items: List<T>, content: @Composable (T) -> Unit
 }
 
 @Composable
-fun IngredientsList(
-    recipe: Recipe
+fun IngredientCard(
+    @DrawableRes iconResource: Int,
+    title: String,
+    subtitle: String
 ) {
-    EasyGrid(nColumns = 3, items = recipe.ingredients) {
-        IngredientCard(it.image, it.title, it.subtitle)
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.padding(bottom = 16.dp)
+    ) {
+        Card(
+            shape = RoundedCornerShape(12.dp),
+            colors = CardDefaults.cardColors(containerColor =  LightGray),
+            modifier = Modifier
+                .width(100.dp)
+                .height(100.dp)
+                .padding(8.dp)
+        ){
+            Image(
+                painter = painterResource(id = iconResource), 
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(16.dp)
+            )
+        }
+        Text(
+            text = title,
+            fontWeight = FontWeight.Medium,
+            modifier = Modifier.width(100.dp)
+        )
+        Text(
+            text = subtitle,
+            color = DarkGray,
+            fontSize = 14.sp,
+            modifier = Modifier.width(100.dp)
+        )
     }
 }
