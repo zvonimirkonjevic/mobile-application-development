@@ -29,6 +29,10 @@ import androidx.compose.material3.MaterialTheme.shapes
 import androidx.compose.material3.Shapes
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -117,7 +121,7 @@ fun TopImageAndBar(
 @Composable
 fun CircularButton(
     @DrawableRes iconResource: Int,
-    elevation: ButtonElevation = ButtonDefaults.buttonElevation(12.dp),
+    elevation: ButtonElevation? = ButtonDefaults.buttonElevation(12.dp),
     color: Color = DarkGray,
     onClick: () -> Unit = {}
 ) {
@@ -176,4 +180,37 @@ fun Description(
         modifier = Modifier
             .padding(horizontal = 16.dp, vertical = 20.dp)
     )
+}
+
+@Composable
+fun Servings() {
+    var value by remember {
+        mutableStateOf(6)
+    }
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp)
+    ){
+        Text(
+            text = "Servings",
+            fontWeight = FontWeight.Medium,
+            modifier = Modifier
+                .weight(1f)
+        )
+        CircularButton(
+            iconResource = R.drawable.ic_minus,
+            color = Pink,
+            elevation = null,
+            ){
+            value--
+        }
+        Text(
+            text = "$value",
+            fontWeight = FontWeight.Medium,
+            modifier = Modifier
+                .padding(horizontal = 20.dp)
+        )
+    }
 }
