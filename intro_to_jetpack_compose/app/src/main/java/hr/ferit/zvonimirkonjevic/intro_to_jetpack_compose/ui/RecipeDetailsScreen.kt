@@ -40,6 +40,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.Data.Recipe
 import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.Data.recipes
 import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.R
 import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.ui.theme.DarkGray
@@ -129,5 +130,36 @@ fun CircularButton(
             .height(38.dp)
         ){
         Icon(painter = painterResource(id = iconResource), contentDescription = null)
+    }
+}
+
+@Composable
+fun InfoColumn(
+    @DrawableRes iconResource: Int,
+    text: String
+) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Icon(
+            painter = painterResource(id = iconResource),
+            contentDescription = null,
+            tint = Pink,
+            modifier = Modifier.height(24.dp)
+        )
+        Text(text = text, fontWeight = FontWeight.Bold)
+    }
+}
+@Composable
+fun BasicInfo(recipe: Recipe) {
+    Row(
+        horizontalArrangement = Arrangement.SpaceEvenly,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 16.dp)
+    ) {
+        InfoColumn(R.drawable.ic_clock, recipe.cookingTime)
+        InfoColumn(R.drawable.ic_flame, recipe.energy)
+        InfoColumn(R.drawable.ic_star, recipe.rating)
     }
 }
