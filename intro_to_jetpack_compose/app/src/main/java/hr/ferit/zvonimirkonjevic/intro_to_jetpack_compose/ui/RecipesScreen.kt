@@ -201,25 +201,44 @@ fun RecipeCategories() {
 @Composable
 fun IconButton(
     @DrawableRes iconResource: Int,
-    labelText: String
+    text: String,
+    colors: ButtonColors = ButtonDefaults.buttonColors(containerColor =
+    Pink),
+    side: Int = 0
 ) {
     Button(
         onClick = { /*TODO*/ },
-        colors = ButtonDefaults.buttonColors(containerColor = Pink)
+        colors = colors,
     ) {
-        Row{
-            Icon(
-                painter = painterResource(id = iconResource),
-                contentDescription = labelText
-            )
-            Spacer(Modifier.width(2.dp))
-            Text(
-                text = labelText,
-                style = TextStyle(
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Light
+        Row {
+            if (side == 0) {
+                Icon(
+                    painter = painterResource(id = iconResource),
+                    contentDescription = text
                 )
-            )
+                Spacer(Modifier.width(2.dp))
+                Text(
+                    text = text,
+                    style = TextStyle(
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Light
+                    )
+                )
+            }
+            else {
+                Text(
+                    text = text,
+                    style = TextStyle(
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Light
+                    )
+                )
+                Spacer(Modifier.width(2.dp))
+                Icon(
+                    painter = painterResource(id = iconResource),
+                    contentDescription = text
+                )
+            }
         }
     }
 }
