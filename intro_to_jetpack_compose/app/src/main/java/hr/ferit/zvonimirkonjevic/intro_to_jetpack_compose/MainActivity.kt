@@ -15,6 +15,8 @@ import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.ui.theme.Intro_to_jetp
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        setContent {
+            NavigationController()
+        }
     }
 }

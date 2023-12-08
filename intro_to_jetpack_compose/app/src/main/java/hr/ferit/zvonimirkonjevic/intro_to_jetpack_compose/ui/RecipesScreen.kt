@@ -5,6 +5,7 @@ import android.icu.text.CaseMap.Title
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -46,7 +47,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.R
+import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.Routes
 import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.ui.theme.DarkGray
 import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.ui.theme.LightGray
 import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.ui.theme.Pink
@@ -54,9 +57,8 @@ import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.ui.theme.Purple200
 import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.ui.theme.Purple500
 import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.ui.theme.White
 
-@Preview(showBackground = true)
 @Composable
-fun RecipesScreen() {
+fun RecipesScreen(navigation: NavController) {
     Column (
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -65,7 +67,9 @@ fun RecipesScreen() {
         ScreenTitle(title = "What would you like to cook today?", subtitle = "Good morning, Zvonimir")
         SearchBar(iconResource = R.drawable.ic_search, labelText = "Search...")
         RecipeCategories()
-        RecipeCard(imageResource = R.drawable.strawberry_pie_1, title = "Strawberry Cake")
+        RecipeCard(imageResource = R.drawable.strawberry_pie_1, title = "Strawberry Cake"){
+            navigation.navigate(Routes.getDetailsPath(0))
+        }
         IconButton(iconResource = R.drawable.ic_plus,  "Add new recipe")
     }
 }
@@ -272,7 +276,8 @@ fun Chip(
 @Composable
 fun RecipeCard(
     @DrawableRes imageResource: Int,
-    title: String
+    title: String,
+    onClick: () -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -285,6 +290,9 @@ fun RecipeCard(
                 .clip(RoundedCornerShape(12.dp))
                 .width(215.dp)
                 .height(326.dp)
+                .clickable {
+                    onClick()
+                }
         ){
             Image(
                 painter = painterResource(id = imageResource),

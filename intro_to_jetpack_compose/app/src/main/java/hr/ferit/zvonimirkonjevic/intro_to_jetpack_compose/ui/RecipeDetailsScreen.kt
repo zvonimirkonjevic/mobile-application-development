@@ -47,6 +47,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.Data.Recipe
 import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.Data.recipes
 import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.R
@@ -56,11 +57,13 @@ import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.ui.theme.Pink
 import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.ui.theme.Transparent
 import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.ui.theme.White
 
-@Preview(showBackground = true)
 @Composable
-fun RecipeDetailsScreen() {
+fun RecipeDetailsScreen(
+    navigation: NavController,
+    recipeId: Int
+    ) {
     val scrollState = rememberLazyListState()
-    val recipe = recipes[0]
+    val recipe = recipes[recipeId]
 
     LazyColumn(
         state = scrollState,
