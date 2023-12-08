@@ -43,7 +43,9 @@ import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.Data.recipes
 import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.R
 import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.ui.theme.DarkGray
 import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.ui.theme.LightGray
+import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.ui.theme.White
 
+@Preview
 @Composable
 fun RecipeDetailsScreen() {
     val scrollState = rememberLazyListState()
@@ -54,7 +56,7 @@ fun RecipeDetailsScreen() {
         modifier = Modifier.fillMaxSize(),
     ){
         item{
-            
+            TopImageAndBar(recipe.image)
         }
     }
 }
@@ -102,7 +104,7 @@ fun CircularButton(
 ) {
     Button(
         contentPadding = PaddingValues(),
-        colors = ButtonDefaults.buttonColors(contentColor = color),
+        colors = ButtonDefaults.buttonColors(containerColor = White, contentColor = color),
         elevation = elevation,
         onClick = onClick,
         shape = RoundedCornerShape(5.dp),
