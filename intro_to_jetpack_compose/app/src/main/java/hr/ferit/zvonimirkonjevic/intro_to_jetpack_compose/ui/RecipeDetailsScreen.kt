@@ -68,6 +68,7 @@ fun RecipeDetailsScreen() {
             BasicInfo(recipe = recipe)
             Description(recipe = recipe)
             Servings()
+            IngredientsHeader()
         }
     }
 }
