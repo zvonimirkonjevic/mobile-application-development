@@ -6,6 +6,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -15,9 +16,11 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ButtonElevation
 import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MaterialTheme.shapes
 import androidx.compose.material3.Shapes
@@ -69,5 +72,26 @@ fun TopImageAndBar(
             modifier = Modifier
                 .fillMaxSize()
         )
+    }
+}
+
+@Composable
+fun CircularButton(
+    @DrawableRes iconResource: Int,
+    elevation: ButtonElevation = ButtonDefaults.buttonElevation(12.dp),
+    color: Color = DarkGray,
+    onClick: () -> Unit = {}
+) {
+    Button(
+        contentPadding = PaddingValues(),
+        colors = ButtonDefaults.buttonColors(contentColor = color),
+        elevation = elevation,
+        onClick = onClick,
+        shape = RoundedCornerShape(5.dp),
+        modifier = Modifier
+            .width(38.dp)
+            .height(38.dp)
+        ){
+        Icon(painter = painterResource(id = iconResource), contentDescription = null)
     }
 }
