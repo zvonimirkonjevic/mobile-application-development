@@ -62,6 +62,7 @@ fun RecipeDetailsScreen() {
             TopImageAndBar(recipe.image)
             ScreenTitle(title = recipe.title, subtitle = recipe.category)
             BasicInfo(recipe = recipe)
+            Description(recipe = recipe)
         }
     }
 }
