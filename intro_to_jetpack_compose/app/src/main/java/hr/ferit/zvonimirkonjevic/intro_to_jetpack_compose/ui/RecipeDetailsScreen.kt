@@ -67,6 +67,7 @@ fun RecipeDetailsScreen() {
             ScreenTitle(title = recipe.title, subtitle = recipe.category)
             BasicInfo(recipe = recipe)
             Description(recipe = recipe)
+            Servings()
         }
     }
 }
@@ -212,5 +213,12 @@ fun Servings() {
             modifier = Modifier
                 .padding(horizontal = 20.dp)
         )
+        CircularButton(
+            iconResource = R.drawable.ic_plus,
+            color = Pink,
+            elevation = null,
+        ){
+            value++
+        }
     }
 }
