@@ -164,3 +164,15 @@ fun BasicInfo(recipe: Recipe) {
         InfoColumn(R.drawable.ic_star, recipe.rating)
     }
 }
+
+@Composable
+fun Description(
+    recipe: Recipe
+) {
+    Text(
+        text = recipe.description,
+        fontWeight = FontWeight.Medium,
+        modifier = Modifier
+            .padding(horizontal = 16.dp, vertical = 20.dp)
+    )
+}
