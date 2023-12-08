@@ -42,6 +42,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -52,6 +53,7 @@ import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.R
 import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.ui.theme.DarkGray
 import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.ui.theme.LightGray
 import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.ui.theme.Pink
+import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.ui.theme.Transparent
 import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.ui.theme.White
 
 @Preview(showBackground = true)
@@ -363,7 +365,8 @@ fun Reviews(recipe: Recipe) {
     ) {
         Column {
             Text(text = "Reviews", style = TextStyle(fontSize = 16.sp,
-                fontWeight = FontWeight.Bold))
+                fontWeight = FontWeight.Bold)
+            )
             Text(text = recipe.reviews, color = DarkGray)
         }
         IconButton(
@@ -372,6 +375,32 @@ fun Reviews(recipe: Recipe) {
             colors = ButtonDefaults.buttonColors(containerColor =
             Transparent, contentColor = Pink),
             side = 1
+        )
+    }
+}
+
+@Composable
+fun OtherRecipes() {
+    Row(
+        horizontalArrangement = Arrangement.SpaceBetween,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp)
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.strawberry_pie_2),
+            contentDescription = "Strawberry Pie",
+            modifier = Modifier
+                .weight(1f)
+                .clip(RoundedCornerShape(12.dp))
+        )
+        Spacer(modifier = Modifier.width(16.dp))
+        Image(
+            painter = painterResource(id = R.drawable.strawberry_pie_3),
+            contentDescription = "Strawberry Pie",
+            modifier = Modifier
+                .weight(1f)
+                .clip(RoundedCornerShape(12.dp))
         )
     }
 }

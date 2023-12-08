@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -65,7 +66,7 @@ fun RecipesScreen() {
         SearchBar(iconResource = R.drawable.ic_search, labelText = "Search...")
         RecipeCategories()
         RecipeCard(imageResource = R.drawable.strawberry_pie_1, title = "Strawberry Cake")
-        IconButton(iconResource = R.drawable.ic_plus, labelText = "Add new recipe")
+        IconButton(iconResource = R.drawable.ic_plus,  "Add new recipe")
     }
 }
 
