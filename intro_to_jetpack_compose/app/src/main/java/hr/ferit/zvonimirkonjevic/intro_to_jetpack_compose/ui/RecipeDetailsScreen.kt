@@ -334,3 +334,21 @@ fun IngredientsList(
         IngredientCard(it.image, it.name, it.subtitle)
     }
 }
+
+@Composable
+fun ShoppingListButton() {
+    Button(
+        onClick = { /*TODO*/ },
+        elevation = null,
+        colors = ButtonDefaults.buttonColors(
+            containerColor = Color.Transparent,
+            contentColor = Color.Black
+        ),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp)
+    ) {
+        Text(text = "Add to shopping list", modifier =
+        Modifier.padding(8.dp))
+    }
+}
