@@ -75,6 +75,7 @@ fun RecipeDetailsScreen() {
             IngredientsHeader()
             IngredientsList(recipe = recipe)
             ShoppingListButton()
+            Reviews(recipe)
         }
     }
 }
