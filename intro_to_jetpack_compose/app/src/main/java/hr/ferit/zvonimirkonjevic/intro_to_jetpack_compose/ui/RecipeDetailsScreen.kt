@@ -352,3 +352,26 @@ fun ShoppingListButton() {
         Modifier.padding(8.dp))
     }
 }
+
+@Composable
+fun Reviews(recipe: Recipe) {
+    Row(
+        horizontalArrangement = Arrangement.SpaceBetween,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(PaddingValues(start = 16.dp))
+    ) {
+        Column {
+            Text(text = "Reviews", style = TextStyle(fontSize = 16.sp,
+                fontWeight = FontWeight.Bold))
+            Text(text = recipe.reviews, color = DarkGray)
+        }
+        IconButton(
+            iconResource = R.drawable.ic_arrow_right,
+            text = "See all",
+            colors = ButtonDefaults.buttonColors(containerColor =
+            Transparent, contentColor = Pink),
+            side = 1
+        )
+    }
+}
