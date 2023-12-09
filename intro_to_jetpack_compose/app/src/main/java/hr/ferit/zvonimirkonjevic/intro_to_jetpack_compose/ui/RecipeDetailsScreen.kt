@@ -3,6 +3,7 @@ package hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.ui
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -51,6 +52,7 @@ import androidx.navigation.NavController
 import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.Data.Recipe
 import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.Data.recipes
 import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.R
+import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.Routes
 import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.ui.theme.DarkGray
 import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.ui.theme.LightGray
 import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.ui.theme.Pink
@@ -70,7 +72,7 @@ fun RecipeDetailsScreen(
         modifier = Modifier.fillMaxSize(),
     ){
         item{
-            TopImageAndBar(recipe.image)
+            TopImageAndBar(recipe.image, navigation)
             ScreenTitle(title = recipe.title, subtitle = recipe.category)
             BasicInfo(recipe = recipe)
             Description(recipe = recipe)
@@ -86,7 +88,8 @@ fun RecipeDetailsScreen(
 
 @Composable
 fun TopImageAndBar(
-    @DrawableRes coverImage: Int
+    @DrawableRes coverImage: Int,
+    navigation: NavController
 ) {
     Box(
         modifier = Modifier
@@ -111,7 +114,9 @@ fun TopImageAndBar(
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp, vertical = 8.dp)
             ) {
-                CircularButton(iconResource = R.drawable.ic_arrow_back, color = Pink)
+                CircularButton(iconResource = R.drawable.ic_arrow_back, color = Pink){
+                    navigation.navigate(Routes.SCREEN_ALL_RECIPES)
+                }
                 CircularButton(iconResource = R.drawable.ic_favorite)
             }
             Box(
@@ -147,6 +152,9 @@ fun CircularButton(
         modifier = Modifier
             .width(38.dp)
             .height(38.dp)
+            .clickable {
+                onClick()
+            }
         ){
         Icon(painter = painterResource(id = iconResource), contentDescription = null)
     }
