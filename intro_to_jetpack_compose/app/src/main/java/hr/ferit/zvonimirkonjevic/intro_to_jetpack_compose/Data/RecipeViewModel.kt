@@ -27,4 +27,10 @@ class RecipeViewModel: ViewModel() {
                 }
             }
     }
+
+    fun updateRecipe(recipe: Recipe) {
+        db.collection("recipes")
+            .document(recipe.id)
+            .set(recipe)
+    }
 }
