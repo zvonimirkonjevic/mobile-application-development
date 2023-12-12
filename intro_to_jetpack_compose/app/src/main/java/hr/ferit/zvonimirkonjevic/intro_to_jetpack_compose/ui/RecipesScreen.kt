@@ -17,11 +17,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -48,6 +50,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import coil.compose.rememberAsyncImagePainter
+import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.Data.RecipeViewModel
 import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.R
 import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.Routes
 import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.ui.theme.DarkGray
@@ -58,7 +62,10 @@ import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.ui.theme.Purple500
 import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.ui.theme.White
 
 @Composable
-fun RecipesScreen(navigation: NavController) {
+fun RecipesScreen(
+    viewModel: RecipeViewModel,
+    navigation: NavController
+    ) {
     Column (
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -67,10 +74,8 @@ fun RecipesScreen(navigation: NavController) {
         ScreenTitle(title = "What would you like to cook today?", subtitle = "Good morning, Zvonimir")
         SearchBar(iconResource = R.drawable.ic_search, labelText = "Search...")
         RecipeCategories()
-        RecipeCard(imageResource = R.drawable.strawberry_pie_1, title = "Strawberry Cake"){
-            navigation.navigate(Routes.getDetailsPath(0))
-        }
         IconButton(iconResource = R.drawable.ic_plus,  "Add new recipe")
+        RecipeList(viewModel = viewModel, navigation = navigation)
     }
 }
 
@@ -275,53 +280,105 @@ fun Chip(
 
 @Composable
 fun RecipeCard(
-    @DrawableRes imageResource: Int,
+    imageResource: String,
     title: String,
     onClick: () -> Unit
 ) {
     Box(
         modifier = Modifier
-            .width(215.dp)
-            .height(326.dp)
             .padding(bottom = 16.dp)
-    ){
+            .height(326.dp)
+            .width(215.dp)
+    ) {
         Card(
+            shape = RoundedCornerShape(12.dp),
+            colors = CardDefaults.cardColors(containerColor = LightGray),
             modifier = Modifier
-                .clip(RoundedCornerShape(12.dp))
-                .width(215.dp)
-                .height(326.dp)
+                .padding(bottom = 8.dp)
                 .clickable {
                     onClick()
                 }
-        ){
-            Image(
-                painter = painterResource(id = imageResource),
-                contentDescription = title,
+        ) {
+            Box {
+                Image(
+                    painter = rememberAsyncImagePainter(model =
+                    imageResource),
+                    contentDescription = title,
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .fillMaxSize()
+                )
+                Column(
+                    horizontalAlignment = Alignment.Start,
+                    verticalArrangement = Arrangement.Bottom,
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .padding(16.dp)
+                ) {
+                    Text(
+                        text = title,
+                        letterSpacing = 0.32.sp,
+                        style = TextStyle(
+                            color = White,
+                            fontWeight = FontWeight.SemiBold,
+                            fontSize = 16.sp
+                        ),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                    )
+                    Row {
+                        Chip("30 min")
+                        Spacer(Modifier.width(4.dp))
+                        Chip("4 ingredients")
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun RecipeList(
+    viewModel: RecipeViewModel,
+    navigation: NavController
+) {
+    Column {
+        Row(
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 12.dp)
+        ) {
+            Text(
+                text = "7 recipes",
+                style = TextStyle(color = Color.DarkGray, fontSize =
+                14.sp)
+            )
+            Icon(
+                painter = painterResource(id = R.drawable.ic_flame),
+                contentDescription = "Flame",
+                tint = Color.DarkGray,
                 modifier = Modifier
-                    .fillMaxSize(),
-                contentScale = ContentScale.Crop,
+                    .width(18.dp)
+                    .height(18.dp)
             )
         }
-        Column(
+        LazyRow(
             modifier = Modifier
-                .padding(horizontal = 12.dp, vertical = 14.dp)
-                .align(Alignment.BottomStart)
-        ){
-            Text(
-                title,
-                style = TextStyle(
-                    color = White,
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Bold
-                )
-            )
-            Row {
-                Chip(text = "30min")
-                Spacer(
-                    modifier = Modifier
-                    .padding(horizontal = 2.dp)
-                )
-                Chip(text = "4 ingredients")
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp)
+        ) {
+            items(viewModel.recipesData.size) {
+                RecipeCard(
+                    imageResource = viewModel.recipesData[it].image,
+                    title = viewModel.recipesData[it].title
+                ) {
+                    navigation.navigate(
+                        Routes.getDetailsPath(it)
+                    )
+                }
+                Spacer(modifier = Modifier.width(8.dp))
             }
         }
     }
