@@ -49,8 +49,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import coil.compose.rememberAsyncImagePainter
 import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.Data.Recipe
-import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.Data.recipes
+import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.Data.RecipeViewModel
 import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.R
 import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.Routes
 import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.ui.theme.DarkGray
@@ -61,24 +62,31 @@ import hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose.ui.theme.White
 
 @Composable
 fun RecipeDetailsScreen(
+    viewModel: RecipeViewModel,
     navigation: NavController,
     recipeId: Int
-    ) {
+) {
     val scrollState = rememberLazyListState()
-    val recipe = recipes[recipeId]
-
+    val recipe = viewModel.recipesData[recipeId]
     LazyColumn(
+        verticalArrangement = Arrangement.Top,
+        horizontalAlignment = Alignment.Start,
         state = scrollState,
-        modifier = Modifier.fillMaxSize(),
-    ){
-        item{
-            TopImageAndBar(recipe.image, navigation)
-            ScreenTitle(title = recipe.title, subtitle = recipe.category)
-            BasicInfo(recipe = recipe)
-            Description(recipe = recipe)
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        item {
+            TopImageAndBar(
+                recipe = recipe,
+                viewModel = viewModel,
+                navigation = navigation
+            )
+            ScreenTitle(recipe.title, recipe.category)
+            BasicInfo(recipe)
+            Description(recipe)
             Servings()
             IngredientsHeader()
-            IngredientsList(recipe = recipe)
+            IngredientsList(recipe)
             ShoppingListButton()
             Reviews(recipe)
             OtherRecipes()
@@ -88,16 +96,17 @@ fun RecipeDetailsScreen(
 
 @Composable
 fun TopImageAndBar(
-    @DrawableRes coverImage: Int,
-    navigation: NavController
+    recipe: Recipe,
+    viewModel: RecipeViewModel,
+    navigation: NavController,
 ) {
     Box(
         modifier = Modifier
             .height(300.dp)
             .fillMaxWidth()
-    ){
+    ) {
         Image(
-            painter = painterResource(id = coverImage),
+            painter = rememberAsyncImagePainter(model = recipe.image),
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier
@@ -106,18 +115,31 @@ fun TopImageAndBar(
         Column(
             verticalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxHeight()
         ) {
             Row(
+                verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp, vertical = 8.dp)
+                    .statusBarsPadding()
+                    .height(56.dp)
+                    .padding(horizontal = 16.dp)
             ) {
-                CircularButton(iconResource = R.drawable.ic_arrow_back, color = Pink){
-                    navigation.navigate(Routes.SCREEN_ALL_RECIPES)
+                CircularButton(
+                iconResource = R.drawable.ic_arrow_back,
+                color = Pink
+            ) {
+                navigation.popBackStack(Routes.SCREEN_ALL_RECIPES,
+                    false)
+            }
+                CircularButton(
+                    iconResource = R.drawable.ic_favorite,
+                    color = if(recipe.isFavorited) Pink else DarkGray
+                ) {
+                    recipe.isFavorited = !recipe.isFavorited
+                    viewModel.updateRecipe(recipe)
                 }
-                CircularButton(iconResource = R.drawable.ic_favorite)
             }
             Box(
                 modifier = Modifier
@@ -126,7 +148,7 @@ fun TopImageAndBar(
                         Brush.verticalGradient(
                             colors = listOf(
                                 Color.Transparent,
-                                White
+                                Color.White
                             ),
                             startY = 100f
                         )
@@ -303,7 +325,7 @@ fun <T> EasyGrid(nColumns: Int, items: List<T>, content: @Composable (T) -> Unit
 
 @Composable
 fun IngredientCard(
-    @DrawableRes iconResource: Int,
+    iconResource: String,
     title: String,
     subtitle: String
 ) {
@@ -320,7 +342,7 @@ fun IngredientCard(
                 .padding(8.dp)
         ){
             Image(
-                painter = painterResource(id = iconResource), 
+                painter = rememberAsyncImagePainter(model = iconResource),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
@@ -347,7 +369,7 @@ fun IngredientsList(
     recipe: Recipe
 ) {
     EasyGrid(nColumns = 3, items = recipe.ingredients) {
-        IngredientCard(it.image, it.name, it.subtitle)
+        IngredientCard(it.image, it.title, it.subtitle)
     }
 }
 
