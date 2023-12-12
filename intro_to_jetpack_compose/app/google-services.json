@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "709447924831",
+    "project_id": "ormwalv8-konjevic",
+    "storage_bucket": "ormwalv8-konjevic.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:709447924831:android:fb9acbf114fb543ebbafea",
+        "android_client_info": {
+          "package_name": "hr.ferit.zvonimirkonjevic.intro_to_jetpack_compose"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJYX5O7-n6gk0a3Y1oG848qpanMm1RpoQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
